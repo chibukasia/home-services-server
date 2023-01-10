@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total_unlocks: 1
+  current_unlocks: 1
+  used_unlocks: 1
+  remaining_unlocks: 1
+
+two:
+  total_unlocks: 1
+  current_unlocks: 1
+  used_unlocks: 1
+  remaining_unlocks: 1

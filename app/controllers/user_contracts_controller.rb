@@ -1,0 +1,2 @@
+class UserContractsController < ApplicationController
+end
