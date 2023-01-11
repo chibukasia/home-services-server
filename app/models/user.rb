@@ -1,8 +1,12 @@
 class User < ApplicationRecord
-    has_many :notifications
-    has_one :profile 
-    has_many :reviews
-    has_many :user_services, through: :reviews
-    has_many :unlocks
-    has_many :user_contracts
+
+    has_secure_password
+
+    #Associations
+    has_many :notifications, dependent: :destroy
+    has_one :profile, dependent: :destroy
+    has_many :reviews, dependent: :destroy
+    has_many :user_services, through: :reviews, dependent: :destroy
+    has_many :unlocks, dependent: :destroy
+    has_many :user_contracts, dependent: :destroy
 end
