@@ -13,7 +13,7 @@ class User < ApplicationRecord
     # Validations
     validates :email, uniqueness: true, presence: true 
     validates :username, uniqueness: true, length:{minimum: 3, maximum: 15}, presence: true
-    validates :phone, uniqueness: true, presence: true, {minimum: 9, maximum: 13} 
+    validates :phone, uniqueness: true, presence: true, length: {minimum: 9, maximum: 13} 
     validates :first_name, presence: true 
     validates :last_name, presence: true
     # validates :role, presence: true
