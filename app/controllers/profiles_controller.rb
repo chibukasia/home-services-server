@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-    before_action :authorize
+    # before_action :authorize
     skip_before_action: authorize, only:[:create]
 
     rescue_from ActiveRecord::RecordNotFound, with: :user_profile_not_found
@@ -40,7 +40,7 @@ class ProfilesController < ApplicationController
         render json: {error: "Profile not found"}, status: :not_found
     end
 
-    def authorize
-        render json: {error: "Login or Signup to continue"}, status: :unauthorized
-    end
+    # def authorize
+    #     render json: {error: "Login or Signup to continue"}, status: :unauthorized
+    # end
 end

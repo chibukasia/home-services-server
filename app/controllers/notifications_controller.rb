@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-    before_action :authorize
+    # before_action :authorize
     
     rescue_from ActiveRecord::RecordNotFound, with: :notification_not_found
     def index 
@@ -39,7 +39,7 @@ class NotificationsController < ApplicationController
         render json: {error: "Notification not found"}, status: :not_found
     end 
 
-    def authorize
-        render json: {error: "Login or signup to continue"}, status: :unauthorized unless session.include? :user_id
-    end
+    # def authorize
+    #     render json: {error: "Login or signup to continue"}, status: :unauthorized unless session.include? :user_id
+    # end
 end

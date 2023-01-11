@@ -54,8 +54,4 @@ rescue_from ActiveRecord::RecordNotFound, with: :user_not_found
         render json: {error: "User not found"}, status: :not_found
     end
 
-    # Authorize users
-    def authorize 
-        render json: {error: "Login or signup to continue"}, status: :unauthorized unless session.include? :user_id
-    end
 end
