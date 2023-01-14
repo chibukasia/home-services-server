@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
     # before_action :authorize
-    skip_before_action: authorize, only:[:create]
+    skip_before_action :authorize, only:[:create]
 
     rescue_from ActiveRecord::RecordNotFound, with: :user_profile_not_found
     def show
@@ -8,11 +8,15 @@ class ProfilesController < ApplicationController
         render json: profile, status: :ok 
     end
 
-    def create 
-        user = find_user
-        profile = user.create_profile!(profile_params)
-        render json: profile, status: :created
+    def index 
+        profiles = Profile.all
+        render json: profiles
     end
+    # def create 
+    #     user = find_user
+    #     profile = user.create_profile!(profile_params)
+    #     render json: profile, status: :created
+    # end
 
     def update 
         profile = find_profile
