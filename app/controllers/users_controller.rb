@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
 
 rescue_from ActiveRecord::RecordNotFound, with: :user_not_found 
-    before_action :authorize
-    skip_before_action :authorize, only:[:create, :index]
+    skip_before_action :authorize, only:[:create, :index, :click]
     # GET all users 
     def index 
         users = User.all
@@ -11,9 +10,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :user_not_found
 
     # GET one user
     def show 
-        user = find_user 
-        # puts user.username
-        # binding.break
+        user = User.find(session[:user_id]) 
         render json: user, status: :ok
     end
 
@@ -58,9 +55,5 @@ rescue_from ActiveRecord::RecordNotFound, with: :user_not_found
     # User not found response 
     def user_not_found 
         render json: {error: "User not found"}, status: :not_found
-    end
-
-    def authorize
-        render json: {error: "user not found"}, status: :not_found unless session.include? :user_id
     end
 end
