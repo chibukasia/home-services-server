@@ -1,5 +1,4 @@
 class ProfilesController < ApplicationController
-    # before_action :authorize
     skip_before_action :authorize, only:[:create]
 
     rescue_from ActiveRecord::RecordNotFound, with: :user_profile_not_found
@@ -24,16 +23,16 @@ class ProfilesController < ApplicationController
         render json: profile, status: :accepted
     end
 
+    def destroy
+        profile = find_profile
+        profile.destroy
+        head :no_content
+    end
     # Private methods 
     private 
 
-    # Find user 
-    def find_user 
-        User.find(session[:user_id])
-    end 
-
     def find_profile
-        Profile.find_by(user_id: session[:user_id])
+        Profile.find_by(user_id: current_user.id)
     end
 
     def profile_params
@@ -43,8 +42,4 @@ class ProfilesController < ApplicationController
     def user_profile_not_found
         render json: {error: "Profile not found"}, status: :not_found
     end
-
-    # def authorize
-    #     render json: {error: "Login or Signup to continue"}, status: :unauthorized
-    # end
 end

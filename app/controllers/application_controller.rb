@@ -1,13 +1,40 @@
 class ApplicationController < ActionController::API
-
+    before_action :authorize
     wrap_parameters format: []
-    # Enable all controllers to work with cookies
-    include ActionController::Cookies
     # Rescue from invalid user responses
     rescue_from ActiveRecord::RecordInvalid, with: :response_to_unprocessable_entity
 
-    before_action :authorize
-    # Private methods
+
+    def encode_token(payload)
+        JWT.encode(payload, 'hulio')
+    end 
+
+    def auth_header
+        request.headers['Authorization']
+    end
+
+    def decoded_token
+        if auth_header
+            token = auth_header.split(' ')[1]
+            begin
+                JWT.decode(token, 'hulio', true, algorithm: 'HS256')
+
+            rescue JWT::DecodeError
+                nil
+            end
+        end
+    end
+
+    def current_user 
+        if decoded_token
+            user_id = decoded_token[0]['user_id']
+            user = User.find_by(id: user_id)
+        end
+    end
+
+    def logged_in?
+        !!current_user
+    end
     private
 
     def response_to_unprocessable_entity(invalid) 
@@ -16,6 +43,6 @@ class ApplicationController < ActionController::API
 
      # Authorize users
      def authorize 
-        render json: {error: "Login or signup to continue"}, status: :unauthorized unless session.include? :user_id
+        render json: {error: "Login or signup to continue"}, status: :unauthorized unless logged_in?
     end
 end
