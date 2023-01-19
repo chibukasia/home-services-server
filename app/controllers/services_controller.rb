@@ -13,20 +13,32 @@ class ServicesController < ApplicationController
     end
 
     def create
-        service = Service.create!(service_params)
-        render json: service, status: :created
+        if current_user
+            service = Service.create!(service_params)
+            render json: service, status: :created
+        else
+            unauthorized_user
+        end
     end
 
     def update
         service = find_service
-        service.update!(service_params)
-        render json: {service: service, message: "Service updated successfully"}, status: :accepted
+        if current_user
+            service.update!(service_params)
+            render json: {service: service, message: "Service updated successfully"}, status: :accepted
+        else
+            unauthorized_user
+        end
     end
 
     def destroy
         service = find_service
-        service.destroy
-        head :no_content
+        if current_user
+            service.destroy
+            head :no_content
+        else
+            unauthorized_user
+        end
     end
 
     # Private methods
@@ -44,4 +56,7 @@ class ServicesController < ApplicationController
         render json: {error: "Service not found"}, status: :not_found
     end
 
+    def unauthorized_user
+        render json: {error: "Unauthorized user"}, status: :unauthorized
+    end
 end

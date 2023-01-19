@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
 
 
     def encode_token(payload)
-        JWT.encode(payload, 'hulio')
+        JWT.encode(payload, 'user')
     end 
 
     def auth_header
@@ -17,8 +17,7 @@ class ApplicationController < ActionController::API
         if auth_header
             token = auth_header.split(' ')[1]
             begin
-                JWT.decode(token, 'hulio', true, algorithm: 'HS256')
-
+                JWT.decode(token, 'user', true, algorithm: 'HS256')
             rescue JWT::DecodeError
                 nil
             end
@@ -27,8 +26,8 @@ class ApplicationController < ActionController::API
 
     def current_user 
         if decoded_token
-            user_id = decoded_token[0]['user_id']
-            user = User.find_by(id: user_id)
+            user_id = decoded_token[0]['user_id'] 
+            user = User.find_by(id: user_id)       
         end
     end
 
