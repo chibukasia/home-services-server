@@ -12,9 +12,9 @@ Rails.application.routes.draw do
   resources :profiles
   resources :users
 
-  post '/login', to: "sessions#create"
-  get '/logged_user', to: "users#show"
-  delete '/logout', to: "sessions#destroy"
+  post '/login', to: 'sessions#create'
+  get '/logged_user', to: 'users#show'
+  delete '/logout', to: 'sessions#destroy'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

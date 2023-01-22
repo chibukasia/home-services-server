@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     skip_before_action :authorize, only:[:create, :index]
+    wrap_parameters format: []
     # GET all users 
     def index 
         users = User.all
@@ -8,8 +9,8 @@ class UsersController < ApplicationController
 
     # GET one user
     def show 
-        user = current_user
-        render json: user, status: :ok
+        # user = current_user
+        render json: current_user, status: :ok
     end
 
     # Create a new user 

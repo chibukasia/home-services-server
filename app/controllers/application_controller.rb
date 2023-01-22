@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
     before_action :authorize
-    wrap_parameters format: []
+    # wrap_parameters format: []
     # Rescue from invalid user responses
     rescue_from ActiveRecord::RecordInvalid, with: :response_to_unprocessable_entity
 
