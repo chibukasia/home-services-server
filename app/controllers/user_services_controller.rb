@@ -8,8 +8,8 @@ class UserServicesController < ApplicationController
     end
 
     def create
-        user = User.find(session[:user_id])
-        user_service = user.user_services.create(user_servicice_params)
+        user = User.find(current_user.id)
+        user_service = user.user_services.create!(user_servicice_params)
         render json: user_service, status: :created
     end
 
