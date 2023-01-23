@@ -1,5 +1,5 @@
 class ServicesController < ApplicationController
-    skip_before_action :authorize, only:[ :show]
+    skip_before_action :authorize, only:[ :show, :index]
     rescue_from ActiveRecord::RecordNotFound, with: :service_not_found
 
     def index 
