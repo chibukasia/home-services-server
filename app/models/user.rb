@@ -6,7 +6,7 @@ class User < ApplicationRecord
     has_many :notifications, dependent: :destroy
     has_one :profile, dependent: :destroy
     has_many :reviews, dependent: :destroy
-    has_many :user_services, through: :reviews
+    has_many :user_services
     has_many :unlocks, dependent: :destroy
     has_many :user_contracts, dependent: :destroy
 
