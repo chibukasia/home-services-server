@@ -35,8 +35,20 @@ class AppointmentOrdersController < ApplicationController
     end
 
     def overdue_appointments
-        appointment_orders = AppointmentOrder.where(appointment_date: < Time.now )
+        appointment_orders = AppointmentOrder.where(:appointment_date < Time.now )
         render json: appointment_orders, status: :ok
+    end
+
+    def service_person_overdue_appointements
+        @overdue_appointments = []
+        if current_user.role == "service_person" 
+            user_services = UserService.where(user_id: current_user.id ) 
+            user_services.each do |service|
+                appointments=AppointmentOrder.where(:user_service_id== service.id and :appointment_date< Time.now)
+                @overdue_appointments <<< appointements
+            end
+        end
+        render json: @overdue_appointments.flatten(1), status: :ok
     end
     # Private methods 
     private 
