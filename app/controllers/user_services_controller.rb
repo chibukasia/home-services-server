@@ -3,7 +3,7 @@ class UserServicesController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :user_service_not_found
 
     def index
-        user_services = UserService.all 
+        user_services = UserService.all.order(created_at: :desc) 
         render json: user_services
     end
 
@@ -30,6 +30,16 @@ class UserServicesController < ApplicationController
         head :no_content
     end
 
+    def current_user_services 
+        user_services=UserService.where(:id== current_user.id).order(created_at: :desc)
+        render json: user_services, status: :ok
+
+    end
+
+    def top_rated_services 
+        # user_services = User
+        # service_reviews = Review.where(service_id: == )
+    end
     # Private methods 
     private
 
