@@ -15,8 +15,8 @@ class AppointmentOrdersController < ApplicationController
 
     # CREATE new appointement order
     def create 
-        user_service = UserService.find(id: params[:id])
-        appointment_order = user_service.appointment_order.create!(appointment_order_params)
+        user_service = UserService.find(params[:id])
+        appointment_order = user_service.appointment_orders.create!(appointment_order_params)
         render json: {appointement: appointment_order, message: "Your appointment has been sent"}, status: :created
     end
 
