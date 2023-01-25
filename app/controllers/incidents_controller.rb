@@ -6,7 +6,9 @@ class IncidentsController < ApplicationController
     end 
 
     def create 
-        incident = Incident.create!(incident_params)
+        # incident = Incident.create!(incident_params)
+        appointment_order = AppointmentOrder.find(params[:id])
+        incident = appointment_order.incidents.create!(incident_params)
         render json: {incident: incident, message: "Incident Reported Succesfully"}, status: :created 
     end 
 
@@ -26,6 +28,18 @@ class IncidentsController < ApplicationController
         head :no_content
     end
 
+    # TODO LATER 
+    def resolved_incidents
+    end
+
+    def unresolved_incidents
+    end
+
+    def service_person_incidents
+    end 
+
+    def user_incidents
+    end
     # Private params 
     private 
     def incident_params 
