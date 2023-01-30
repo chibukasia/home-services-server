@@ -9,7 +9,6 @@ class UsersController < ApplicationController
 
     # GET one user
     def show 
-        # user = current_user
         render json: current_user, status: :ok
     end
 

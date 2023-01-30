@@ -60,7 +60,7 @@ class AppointmentOrdersController < ApplicationController
 
     # Appointment order params 
     def appointment_order_params
-        params.permit(:appointment_date, :user_service_id)
+        params.permit(:appointment_date, :user_service_id, :status)
     end
 
     def appointment_order_not_found

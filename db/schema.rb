@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_10_132642) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_25_140951) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_10_132642) do
     t.bigint "user_service_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
     t.index ["user_service_id"], name: "index_appointment_orders_on_user_service_id"
   end
 
@@ -57,6 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_10_132642) do
     t.bigint "appointment_order_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "resolved"
     t.index ["appointment_order_id"], name: "index_incidents_on_appointment_order_id"
   end
 
@@ -137,6 +139,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_10_132642) do
     t.bigint "service_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "start_time"
+    t.string "end_time"
     t.index ["service_id"], name: "index_user_services_on_service_id"
     t.index ["user_id"], name: "index_user_services_on_user_id"
   end
