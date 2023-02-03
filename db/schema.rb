@@ -45,9 +45,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_140951) do
   create_table "appointment_orders", force: :cascade do |t|
     t.datetime "appointment_date"
     t.bigint "user_service_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
+    t.index ["user_id"], name: "index_appointment_orders_on_user_id"
     t.index ["user_service_id"], name: "index_appointment_orders_on_user_service_id"
   end
 
@@ -164,6 +166,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_140951) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "appointment_orders", "user_services"
+  add_foreign_key "appointment_orders", "users"
   add_foreign_key "incidents", "appointment_orders"
   add_foreign_key "notifications", "users"
   add_foreign_key "profiles", "users"

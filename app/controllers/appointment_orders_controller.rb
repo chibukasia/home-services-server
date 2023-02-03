@@ -15,8 +15,12 @@ class AppointmentOrdersController < ApplicationController
 
     # CREATE new appointement order
     def create 
-        user_service = UserService.find(params[:id])
-        appointment_order = user_service.appointment_orders.create!(appointment_order_params)
+        # puts params[:id]
+        # binding.break
+        # user_service = UserService.find(params[:user_service_id])
+        # puts user_service
+        # binding.break
+        appointment_order = current_user.appointment_orders.create!(appointment_order_params)
         render json: {appointement: appointment_order, message: "Your appointment has been sent"}, status: :created
     end
 
@@ -39,17 +43,17 @@ class AppointmentOrdersController < ApplicationController
         render json: appointment_orders, status: :ok
     end
 
-    def service_person_overdue_appointements
-        @overdue_appointments = []
-        if current_user.role == "service_person" 
-            user_services = UserService.where(user_id: current_user.id ) 
-            user_services.each do |service|
-                appointments=AppointmentOrder.where(:user_service_id== service.id and :appointment_date< Time.now)
-                @overdue_appointments <<< appointements
-            end
-        end
-        render json: @overdue_appointments.flatten(1), status: :ok
-    end
+    # def service_person_overdue_appointements
+    #     @overdue_appointments = []
+    #     if current_user.role == "service_person" 
+    #         user_services = UserService.where(user_id: current_user.id ) 
+    #         user_services.each do |service|
+    #             appointments=AppointmentOrder.where(:user_service_id== service.id && :appointment_date< Time.now)
+    #             @overdue_appointments <<< appointements
+    #         end
+    #     end
+    #     render json: @overdue_appointments.flatten(1), status: :ok
+    # end
     # Private methods 
     private 
 
@@ -60,7 +64,7 @@ class AppointmentOrdersController < ApplicationController
 
     # Appointment order params 
     def appointment_order_params
-        params.permit(:appointment_date, :user_service_id, :status)
+        params.permit(:appointment_date, :user_service_id, :status, :user_id)
     end
 
     def appointment_order_not_found

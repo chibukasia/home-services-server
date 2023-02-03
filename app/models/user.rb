@@ -9,6 +9,7 @@ class User < ApplicationRecord
     has_many :user_services
     has_many :unlocks, dependent: :destroy
     has_many :user_contracts, dependent: :destroy
+    has_many :appointment_orders, dependent: :destroy
 
     # Validations
     validates :email, uniqueness: true, presence: true 
