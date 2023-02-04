@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/logged_user', to: 'users#show'
   delete '/logout', to: 'sessions#destroy'
   get '/current_user_services', to: 'user_services#current_user_services'
+  get '/user_appointments', to: 'appointment_orders#user_appointments'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

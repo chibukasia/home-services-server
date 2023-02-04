@@ -1,4 +1,4 @@
 class AppointmentOrderSerializer < ActiveModel::Serializer
-  attributes :id, :appointment_date, :status
+  attributes :id, :appointment_date, :status, :created_at, :updated_at
   belongs_to :user_service
 end
