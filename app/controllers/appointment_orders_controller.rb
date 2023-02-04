@@ -43,6 +43,10 @@ class AppointmentOrdersController < ApplicationController
         render json: appointment_orders, status: :ok
     end
 
+    def user_appointments 
+        appointements = AppointmentOrder.where(:user_id == current_user.id) 
+        render json: appointements, status: :ok
+    end
     # def service_person_overdue_appointements
     #     @overdue_appointments = []
     #     if current_user.role == "service_person" 

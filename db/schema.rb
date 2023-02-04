@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_140951) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "status"
+    t.boolean "status"
     t.index ["user_id"], name: "index_appointment_orders_on_user_id"
     t.index ["user_service_id"], name: "index_appointment_orders_on_user_service_id"
   end
