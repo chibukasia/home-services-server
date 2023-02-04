@@ -3,7 +3,7 @@ class AppointmentOrdersController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :appointment_order_not_found
     # GET all the appointment orders
     def index 
-        appointment_orders = AppointmentOrder.all
+        appointment_orders = AppointmentOrder.all.order(created_at: :desc)
         render json: appointment_orders
     end
 
@@ -49,7 +49,7 @@ class AppointmentOrdersController < ApplicationController
     end
 
     def service_person_appointments 
-        
+
     end
     # def service_person_overdue_appointements
     #     @overdue_appointments = []
