@@ -5,5 +5,5 @@ class Incident < ApplicationRecord
     # Validations
     validates :incident_name, presence: true
     validates :incident_description, presence: true, length: {minimum: 100}
-    validates :location, presence: true
+    validates :incident_location, presence: true
 end
