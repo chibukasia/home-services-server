@@ -39,7 +39,4 @@ class NotificationsController < ApplicationController
         render json: {error: "Notification not found"}, status: :not_found
     end 
 
-    # def authorize
-    #     render json: {error: "Login or signup to continue"}, status: :unauthorized unless session.include? :user_id
-    # end
 end

@@ -34,7 +34,7 @@ class UserContractsController < ApplicationController
     end
 
     def contract_not_found
-        render json: {error: "Contract not found"}
+        render json: {error: "Contract not found"}, status: :not_found
     end
 
     def contract_params
