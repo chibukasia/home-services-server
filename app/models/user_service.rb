@@ -10,4 +10,9 @@ class UserService < ApplicationRecord
     validates :description, presence: true, length: {minimum: 100, maximum: 1000}
     validates :location, presence: true
     validates :quotation, presence: true, comparison: {greater_than_or_equal_to: 50}
+    validates :image, presence: true 
+
+    def image_url
+        Rails.application.routes.url_helpers.url_for(image) if image.attached?
+    end
 end
