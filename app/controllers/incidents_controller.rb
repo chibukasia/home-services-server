@@ -43,7 +43,7 @@ class IncidentsController < ApplicationController
     # Private params 
     private 
     def incident_params 
-        params.permit(:incident_name, :incident_description, :incident_location, :appointment_order_id, :resolved)
+        params.permit(:incident_name, :incident_description, :incident_location, :appointment_order_id, :resolved, :evidence)
     end 
 
     def find_incident 

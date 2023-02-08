@@ -44,7 +44,7 @@ class UserServicesController < ApplicationController
     private
 
     def user_servicice_params
-        params.permit(:description, :quotation, :location, :user_id, :service_id, :start_time, :end_time)
+        params.permit(:description, :quotation, :location, :user_id, :service_id, :start_time, :end_time, :image)
     end 
 
     def find_user_service 

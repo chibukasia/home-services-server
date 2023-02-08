@@ -4,6 +4,7 @@ class UserService < ApplicationRecord
     # has_many :users, through: :reviews
     belongs_to :user
     belongs_to :service 
+    has_one_attached :image
 
     # Validations 
     validates :description, presence: true, length: {minimum: 100, maximum: 1000}
