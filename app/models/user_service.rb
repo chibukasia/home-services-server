@@ -10,7 +10,7 @@ class UserService < ApplicationRecord
     # Validations 
     validates :description, presence: true, length: {minimum: 100, maximum: 1000}
     validates :location, presence: true
-    validates :quotation, presence: true, comparison: {greater_than_or_equal_to: 50}
+    validates :quotation, presence: true, comparison: {greater_than_or_equal_to: 50, message: "Must be more than Ksh 50"}
     validates :images, presence: true 
     validate :must_have_at_least_three_images 
 
