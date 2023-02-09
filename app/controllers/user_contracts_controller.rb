@@ -12,7 +12,7 @@ class UserContractsController < ApplicationController
     end
 
     def create
-        contract = current_user.contracts.create!(contract_params)
+        contract = current_user.user_contracts.create!(contract_params)
         render json: contract, status: :created
     end
 
