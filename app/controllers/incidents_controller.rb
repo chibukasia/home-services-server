@@ -6,10 +6,18 @@ class IncidentsController < ApplicationController
     end 
 
     def create 
-        # incident = Incident.create!(incident_params)
-        appointment_order = AppointmentOrder.find(params[:appointment_order_id])
-        incident = appointment_order.incidents.create!(incident_params)
-        render json: {incident: incident, message: "Incident Reported Succesfully"}, status: :created 
+        incident = Incident.create!(incident_params)
+        # incident = appointment_order.incidents.create!(incident_params)
+        render json: incident, status: :created 
+        # puts params[:appointment_order_id].to_i
+        # appointment_order = AppointmentOrder.find(params[:appointment_order_id])
+        # if (appointment_order)
+
+        # # puts params
+            
+        # else 
+        #     render json: {error: "Appointment not found"}
+        # end
     end 
 
     def show 
@@ -20,6 +28,7 @@ class IncidentsController < ApplicationController
     def update 
         incident = find_incident 
         incident.update!(user_params)
+        render json: incident, status: :accepted
     end 
 
     def destroy 
@@ -43,7 +52,7 @@ class IncidentsController < ApplicationController
     # Private params 
     private 
     def incident_params 
-        params.permit(:incident_name, :incident_description, :incident_location, :appointment_order_id, :resolved, :evidence)
+        params.require(:incident).permit(:incident_name, :incident_description, :incident_location, :appointment_order_id, :resolved, evidences: [])
     end 
 
     def find_incident 
