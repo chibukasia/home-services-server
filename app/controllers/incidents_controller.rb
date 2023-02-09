@@ -7,17 +7,7 @@ class IncidentsController < ApplicationController
 
     def create 
         incident = Incident.create!(incident_params)
-        # incident = appointment_order.incidents.create!(incident_params)
         render json: incident, status: :created 
-        # puts params[:appointment_order_id].to_i
-        # appointment_order = AppointmentOrder.find(params[:appointment_order_id])
-        # if (appointment_order)
-
-        # # puts params
-            
-        # else 
-        #     render json: {error: "Appointment not found"}
-        # end
     end 
 
     def show 

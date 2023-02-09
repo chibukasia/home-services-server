@@ -8,8 +8,8 @@ class UserServicesController < ApplicationController
     end
 
     def create
-        user = User.find(current_user.id)
-        user_service = user.user_services.create!(user_servicice_params)
+        # user = User.find(current_user.id)
+        user_service = current_user.user_services.create!(user_servicice_params)
         render json: user_service, status: :created
     end
 
@@ -44,7 +44,7 @@ class UserServicesController < ApplicationController
     private
 
     def user_servicice_params
-        params.permit(:description, :quotation, :location, :user_id, :service_id, :start_time, :end_time, :image)
+        params.require(:user_service).permit(:description, :quotation, :location, :user_id, :service_id, :start_time, :end_time, images: [])
     end 
 
     def find_user_service 
