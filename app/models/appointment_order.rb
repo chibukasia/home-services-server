@@ -6,7 +6,7 @@ class AppointmentOrder < ApplicationRecord
     has_many :incidents
 
     # Validations 
-    validates :appointment_date, presence: true, comparison: {greater_than_or_equal_to: :today_date}
+    validates :appointment_date, presence: true, comparison: {greater_than_or_equal_to: :today_date, message: "cannot be a passed date"}
 
 
     # Get todays date
