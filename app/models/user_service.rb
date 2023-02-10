@@ -4,7 +4,6 @@ class UserService < ApplicationRecord
     # has_many :users, through: :reviews
     belongs_to :user
     belongs_to :service 
-    # has_one_attached :image
     has_many_attached :images
 
     # Validations 
@@ -13,10 +12,6 @@ class UserService < ApplicationRecord
     validates :quotation, presence: true, comparison: {greater_than_or_equal_to: 50, message: "Must be more than Ksh 50"}
     validates :images, presence: true 
     validate :must_have_at_least_three_images 
-
-    # def image_url
-    #     Rails.application.routes.url_helpers.url_for(image) if image.attached?
-    # end
 
     def must_have_at_least_three_images
         unless  images.length >= 3
